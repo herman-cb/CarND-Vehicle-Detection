@@ -1,15 +1,13 @@
 # Smart computation of hog features
 
 import glob
-from utils import *
-import time
 from train import *
 import pickle
 
 example_images = glob.glob("vehicle_det_examples/*")
 
 svc = pickle.load(open("svc.pkl", "rb"))
-X_scaler = pickle.load("X_scaler.pkl", "rb")
+X_scaler = pickle.load(open("X_scaler.pkl", "rb"))
 
 out_images = []
 out_maps = []
@@ -92,8 +90,8 @@ for img_src in example_images:
 
     out_images.append(draw_img)
 
-    out_titles.append(img_src[-12:])
-    out_titles.append(img_src[-12:])
+    out_titles.append(img_src[21:])
+    out_titles.append(img_src[21:])
 
     out_images.append(heatmap)
     out_maps.append(heatmap)
@@ -101,6 +99,7 @@ for img_src in example_images:
 
 fig = plt.figure(figsize=(12, 24))
 visualize(fig, 8, 2, out_images, out_titles)
+plt.show()
 
 
 

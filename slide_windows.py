@@ -39,5 +39,6 @@ for img_src in example_images:
     titles.append('')
     print("Time to process one image = {} seconds, over windows = {}".
           format(round(time.time() - t, 2), len(windows)))
-fig = plt.figure(figsize=(12, 18), dpi=300)
+fig = plt.figure(figsize=(12, 18))
 visualize(fig, 5, 2, images, titles)
+plt.show()
