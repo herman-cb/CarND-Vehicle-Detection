@@ -1,5 +1,8 @@
 import os
 import glob
+import numpy as np
+import matplotlib.image as mpimg
+import matplotlib.pyplot as plt
 
 class TrainingData():
     def __init__(self, vehicle_dir="vehicles/", non_vehicle_dir="non-vehicles/"):
@@ -35,5 +38,21 @@ if __name__ == "__main__":
     paths = training_data.get_file_paths()
     print("Number of car images found = {}".format(len(paths["cars"])))
     print("Number of non car images found = {}".format(len(paths["non-cars"])))
+    car_ind = np.random.randint(0, np.max(len(paths["cars"])))
+    non_car_ind = np.random.randint(0, np.max(len(paths["non-cars"])))
+
+    car_image = mpimg.imread(paths["cars"][car_ind])
+    non_car_image = mpimg.imread(paths["non-cars"][non_car_ind])
+
+    fig = plt.figure()
+    a = fig.add_subplot(1, 2, 1)
+    a.set_title("car image")
+    plt.imshow(car_image)
+    b = fig.add_subplot(1, 2, 2)
+    b.set_title("not a car image")
+    plt.imshow(non_car_image)
+    plt.savefig("output_images/car_not_car.png")
+
+
 
 

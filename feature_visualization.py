@@ -15,12 +15,12 @@ non_car_ind = np.random.randint(0, len(non_cars))
 car_image = mpimg.imread(cars[car_ind])
 non_car_image = mpimg.imread(non_cars[non_car_ind])
 
-color_space = 'RGB'
-orient = 6
+color_space = 'YCrCb'
+orient = 9
 pix_per_cell = 8
 cell_per_block = 2
 hog_channel = 0
-spatial_size = (16, 16)
+spatial_size = (32, 32)
 hist_bins = 16
 spatial_feat = True
 hist_feat = True
@@ -48,10 +48,12 @@ non_car_features, non_car_hog_image = single_img_features(non_car_image, color_s
                                                   hist_feat=hist_feat,
                                                   vis=True
                                                  )
+print("car features length = {}".format(car_features.shape))
+print("non car features length = {}".format(non_car_features.shape))
 images = [car_image, car_hog_image, non_car_image, non_car_hog_image]
 titles = ['car image', 'car hog image', 'non car image', 'non car hog image']
 fig = plt.figure(figsize=(12,3))
 visualize(fig, 1, 4, images, titles)
 print("Showing the plot now")
 plt.interactive(False)
-plt.show()
+plt.savefig("output_images/HOG_example.jpg")

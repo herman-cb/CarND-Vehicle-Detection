@@ -300,6 +300,10 @@ def find_cars(img, scale, X_scaler, svc, heatmaplist=[]):
                               (0, 0, 255))
                 img_boxes.append(((xbox_left, ybox_top + ystart), (xbox_left + win_draw, ybox_top + win_draw + ystart)))
                 heatmap[ybox_top + ystart:ybox_top + win_draw + ystart, xbox_left:xbox_left + win_draw] += 1
+    # print("shape before = {}".format(heatmap.shape))
+    heatmap[heatmap > 0] = 1
+    # print("shape after = {}".format(heatmap.shape))
+    # print("Max heatmap = {}, min heatmap = {}".format(np.max(heatmap), np.min(heatmap)))
     heatmaplist.append(heatmap)
 
     if len(heatmaplist) >= 5:
